@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/container_fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="49dp"
+        android:orientation="vertical" />
+
+    <RelativeLayout
+        android:id="@+id/home_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/main_tab_bg3">
+
+        <RadioGroup
+            android:id="@+id/rg_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:background="@drawable/main_tab_radio_bg"
+                android:button="@null"
+                android:drawablePadding="-5dp"
+                android:drawableTop="@drawable/main_tab_live"
+                android:gravity="center"
+                android:paddingBottom="4dp"
+                android:paddingTop="2dp"
+                android:text="测试"
+                android:textColor="@drawable/tab_text_selector"
+                android:textSize="10sp" />
+
+
+            <RadioButton
+                android:id="@+id/rb_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:background="@drawable/main_tab_radio_bg"
+                android:button="@null"
+                android:checked="false"
+                android:drawablePadding="-5dp"
+                android:drawableTop="@drawable/main_tab_mob_live_broadcast"
+                android:gravity="center"
+                android:paddingBottom="4dp"
+                android:paddingTop="2dp"
+                android:text="测试"
+                android:textColor="@drawable/tab_text_selector"
+                android:textSize="10sp" />
+
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:button="@null"
+                android:checked="false"
+                android:enabled="false" />
+
+
+            <RadioButton
+                android:id="@+id/rb_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:background="@drawable/main_tab_radio_bg"
+                android:button="@null"
+                android:checked="false"
+                android:drawablePadding="-5dp"
+                android:drawableTop="@drawable/main_tab_shenqu"
+                android:gravity="center"
+                android:paddingBottom="4dp"
+                android:paddingTop="2dp"
+                android:text="测试"
+                android:textColor="@drawable/tab_text_selector"
+                android:textSize="10sp" />
+
+            <RadioButton
+                android:id="@+id/rb_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:background="@drawable/main_tab_radio_bg"
+                android:button="@null"
+                android:checked="false"
+                android:drawablePadding="-5dp"
+                android:drawableTop="@drawable/main_tab_discovery"
+                android:gravity="center"
+                android:paddingBottom="4dp"
+                android:paddingTop="2dp"
+                android:text="测试"
+                android:textColor="@drawable/tab_text_selector"
+                android:textSize="10sp" />
+
+        </RadioGroup>
+
+
+    </RelativeLayout>
+
+
+    <htb.com.childrenapp.Framework.image.CircleImageView
+        android:id="@+id/rb_channel_mask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/bg_mobile_live_tab" />
+
+</RelativeLayout>
