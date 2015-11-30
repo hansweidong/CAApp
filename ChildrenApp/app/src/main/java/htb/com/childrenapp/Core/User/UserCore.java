@@ -3,11 +3,16 @@ package htb.com.childrenapp.Core.User;
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 
+import htb.com.childrenapp.CAApplication;
+import htb.com.childrenapp.Core.CoreResponse;
 import htb.com.childrenapp.Core.IBaseCore;
+import htb.com.childrenapp.Core.Port;
 import htb.com.childrenapp.Framework.common.Utils;
+import htb.com.childrenapp.Framework.http.CAHttpManager;
+import htb.com.childrenapp.Framework.http.IProtocolEnt;
 
 /**
  * Created by weidong_wu on 15/11/14.
@@ -55,6 +60,17 @@ public class UserCore implements IBaseCore {
     }
 
     /**
+     * 删除存储的userInfo
+     * @param context
+     * @return
+     */
+    public boolean DelUserInfoObj(Context context){
+        boolean isRet = false;
+        isRet = Utils.DelObjFile(context,UserInfoKey);
+        return isRet;
+    }
+
+    /**
      * 添加老师的信息
      * @param teacherInfo
      */
@@ -90,5 +106,18 @@ public class UserCore implements IBaseCore {
      */
     public List<TeacherInfo> getTeacherList(){
         return  teacherList;
+    }
+
+    /**
+     * @note 注销账号
+     */
+    public void LoginOut(){
+        HashMap<String, String> ParmasMap = new HashMap<String, String>();
+        ParmasMap.put("token", CAApplication.tokenId);
+        IProtocolEnt logOutProtocol = new IProtocolEnt();
+        logOutProtocol.setURL(Port.logOutUrl);
+        logOutProtocol.setParamsMap(ParmasMap);
+        CoreResponse logoutResponse = new CoreResponse();
+        CAHttpManager.instance().sendPost(logOutProtocol,logoutResponse);
     }
 }

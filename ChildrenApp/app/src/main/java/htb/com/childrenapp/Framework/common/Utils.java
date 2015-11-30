@@ -1,6 +1,5 @@
 package htb.com.childrenapp.Framework.common;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
@@ -8,9 +7,8 @@ import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -145,6 +143,23 @@ public class Utils {
         }
     }
 
+
+    /**
+     * 删除存储的对象文件
+     * @param context
+     * @param name
+     * @return
+     */
+    public static boolean DelObjFile(Context context,String name){
+        boolean isRet = false;
+        String FilesDir = context.getFilesDir().getPath();
+        File file = new File(FilesDir+File.pathSeparator+name);
+        if (file!=null) {
+            if (file.exists())
+                isRet = file.delete();
+        }
+        return isRet;
+    }
 
     /**
      * @param  name

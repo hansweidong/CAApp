@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import htb.com.childrenapp.Base.BaseFragment;
 import htb.com.childrenapp.Core.CoreManager;
 import htb.com.childrenapp.Core.User.UserCore;
+import htb.com.childrenapp.Framework.common.Utils;
 import htb.com.childrenapp.R;
 
 /**
@@ -35,6 +36,7 @@ public class ui_home extends BaseFragment {
         setContentView(R.layout.ui_home);
         userCore = (UserCore) CoreManager.instance().getCore(UserCore.class);
         initRadioButtonTxtInfo();
+        Utils.DelObjFile(this,"");
     }
 
     /**

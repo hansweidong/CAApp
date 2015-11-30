@@ -2,9 +2,9 @@ package htb.com.childrenapp.UI.Main;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import htb.com.childrenapp.CAApplication;
+import htb.com.childrenapp.Core.CoreManager;
+import htb.com.childrenapp.Core.User.UserCore;
+import htb.com.childrenapp.Framework.common.Utils;
 import htb.com.childrenapp.Framework.widget.CircularImage;
 import htb.com.childrenapp.R;
 import htb.com.childrenapp.UI.Login.ui_login;
@@ -107,6 +109,12 @@ public class Fragment_page_right extends Fragment {
                 startActivity(intent);
                 CAApplication.instance().mList.clear();
                 ((Activity)(getContext())).finish();
+                UserCore userCore = (UserCore)CoreManager.instance().getCore(UserCore.class);
+                userCore.DelUserInfoObj(getContext());
+                if (Utils.isNetworkConnected(getContext())){
+                    //注销账号
+                    userCore.LoginOut();
+                }
             }else if (v.getId() == R.id.imageHead){
 
             }

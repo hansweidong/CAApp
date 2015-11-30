@@ -30,6 +30,25 @@ public class Port {
      */
     public static final String RegisterUrl = URL + "/users/register?";
 
+    /**
+     * @NOTE 手机验证码接口
+     */
+    public static final String VerifyPhoneUrl = URL + "/api/users/verifyPhone?";
+
+    /**
+     * @note 密码重置接口
+     */
+    public static final String PasswordResetUrl = URL + "/api/users/reset?";
+
+    /**
+     * @NOTE 更新个人信息接口
+     */
+    public static final String updateUserInfoUrl = URL + "/api/users/updateInfo?";
+
+    /**
+     * @note 注销接口
+     */
+    public static final String logOutUrl = URL + "/api/users/logout?";
 
 
 }
