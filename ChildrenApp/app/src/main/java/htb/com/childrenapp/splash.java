@@ -1,52 +1,101 @@
 package htb.com.childrenapp;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Handler;
+import android.os.Message;
 
-public class splash extends AppCompatActivity {
 
+
+import java.util.HashMap;
+
+import htb.com.childrenapp.Core.CoreManager;
+import htb.com.childrenapp.Core.Login.LoginResponse;
+import htb.com.childrenapp.Core.Port;
+import htb.com.childrenapp.Core.User.UserCore;
+import htb.com.childrenapp.Core.User.UserInfo;
+import htb.com.childrenapp.Framework.http.CAHttpManager;
+import htb.com.childrenapp.Framework.http.IProtocolEnt;
+import htb.com.childrenapp.UI.Login.ui_login;
+import htb.com.childrenapp.UI.Main.ui_home;
+
+
+public class splash extends Activity {
+
+    private UserCore userCore;
+    private UserInfo userInfo;
+    private LoginResponse loginResponse = null;
+    private boolean  isExitUser = false;
+
+    private Context m_context;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Intent intent = new Intent();
+            intent.setClass(m_context, ui_home.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+
+    private RunableHandler runableHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ui_splash);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        userCore = (UserCore) CoreManager.instance().getCore(UserCore.class);
+        userInfo = (UserInfo)userCore.getUserInfoObj(this);
+        if (userInfo == null)
+            isExitUser = false;
+        else
+            isExitUser = true;
+        m_context = this;
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        runableHandler = new RunableHandler();
+
+        handler.postDelayed(runableHandler,2000);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(runableHandler);
+    }
+
+    private class RunableHandler implements Runnable{
+        @Override
+        public void run() {
+            if (!isExitUser){
+                Intent intent = new Intent();
+                intent.setClass(m_context,ui_login.class);
+                startActivity(intent);
+                finish();
+            }else {
+                sendLoginRequest(userInfo.getPhone(),userInfo.getPassword());
             }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_splash, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
         }
-
-        return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * 发送登陆请求
+     * @param userName
+     * @param password
+     */
+    private void sendLoginRequest(String userName, String password) {
+        HashMap<String, String> ParmasMap = new HashMap<String, String>();
+        ParmasMap.put("phone", userName);
+        ParmasMap.put("password", password);
+        IProtocolEnt loginProtocol = new IProtocolEnt();
+        loginProtocol.setURL(Port.loginUrl);
+        loginProtocol.setParamsMap(ParmasMap);
+        loginResponse = new LoginResponse();
+        loginResponse.setHandler(handler);
+        CAHttpManager.instance().sendPost(loginProtocol, loginResponse);
+    }
+
 }

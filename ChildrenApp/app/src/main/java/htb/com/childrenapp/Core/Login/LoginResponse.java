@@ -8,10 +8,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+import htb.com.childrenapp.CAApplication;
 import htb.com.childrenapp.Core.CoreManager;
 import htb.com.childrenapp.Core.Port;
 import htb.com.childrenapp.Core.User.UserCore;
 import htb.com.childrenapp.Core.User.UserInfo;
+import htb.com.childrenapp.Core.User.UserType;
 import htb.com.childrenapp.Framework.Json.JsonParser;
 
 /**
@@ -40,7 +42,8 @@ public class LoginResponse extends AsyncHttpResponseHandler {
             try {
                 jsonObject = JsonParser.instance().ParserString(msg);
                 if (jsonObject == null) {
-                    handler.sendEmptyMessage(-1);
+                    if (handler!=null)
+                        handler.sendEmptyMessage(-1);
                     return;
                 }
                 int code = jsonObject.getInt("code");
@@ -56,6 +59,12 @@ public class LoginResponse extends AsyncHttpResponseHandler {
                         userInfo.setUsername(userName);
                     int role = dataObj.getInt("role");
                     userInfo.setRole(role);
+                    if (role==1)
+                        CAApplication.m_currentRoleType = UserType.UserTypeEnum.DIRECTOR;
+                    else if (role==2)
+                        CAApplication.m_currentRoleType = UserType.UserTypeEnum.TEACHER;
+                    else if (role==3)
+                        CAApplication.m_currentRoleType = UserType.UserTypeEnum.PARENTS;
                     String avatar = dataObj.getString("avatar");
                     if (avatar != null || avatar.compareTo("") == 0)
                         userInfo.setAvatar(avatar);
@@ -67,12 +76,14 @@ public class LoginResponse extends AsyncHttpResponseHandler {
                         userInfo.setToken(token);
                     UserCore userCore = (UserCore) CoreManager.instance().getCore(UserCore.class);
                     if (userCore == null) {
-                        handler.sendEmptyMessage(-1);
+                        if (handler!=null)
+                            handler.sendEmptyMessage(-1);
                         return;
                     }
                     userCore.setUserInfo(userInfo);
                 }
-                handler.sendEmptyMessage(code);
+                if (handler!=null)
+                    handler.sendEmptyMessage(code);
             } catch (JSONException e) {
                 System.out.println(e.toString());
             }
@@ -82,6 +93,7 @@ public class LoginResponse extends AsyncHttpResponseHandler {
     @Override
     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
         System.out.println("onFailure:" + statusCode);
-        handler.sendEmptyMessage(404);
+        if (handler!=null)
+            handler.sendEmptyMessage(404);
     }
 }

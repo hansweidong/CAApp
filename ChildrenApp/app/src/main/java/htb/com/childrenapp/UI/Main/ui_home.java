@@ -2,30 +2,24 @@ package htb.com.childrenapp.UI.Main;
 
 
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.support.v4.app.Fragment;
 
-import java.util.ArrayList;
-
-import htb.com.childrenapp.Base.BaseActivity;
-import htb.com.childrenapp.Base.CAFragmentAdapter;
+import htb.com.childrenapp.Base.BaseFragment;
 import htb.com.childrenapp.Core.CoreManager;
 import htb.com.childrenapp.Core.User.UserCore;
-import htb.com.childrenapp.Core.User.UserInfo;
 import htb.com.childrenapp.R;
 
 /**
  * Created by weidong_wu on 15/11/13.
  * 邮箱:wwdhao163@163.com
  */
-public class ui_home extends BaseActivity {
+public class ui_home extends BaseFragment {
 
     private String[][] RadioButton_Info = {
             {},
-            {"师资", "班级", "动态", "我"},
+            {"首页", "消息", "师资", "我"},
             {"消息", "小朋友", "家长", "我"},
             {"消息", "宝贝", "老师", "我"}
     };

@@ -218,4 +218,21 @@ public class Utils {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int)(pxValue*scale+0.5f);
     }
+
+
+    /**
+     * 判断字符是否为空
+     *
+     * @param strInfo
+     * @return
+     */
+    public static boolean CheckEditbox(String strInfo) {
+        boolean isRet = false;
+        if (strInfo == null || strInfo.compareTo("") == 0) {
+            isRet = false;
+        } else {
+            isRet = true;
+        }
+        return isRet;
+    }
 }

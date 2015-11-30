@@ -6,18 +6,16 @@ import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
-import htb.com.childrenapp.Base.BaseActivity;
+import htb.com.childrenapp.Base.BaseFragment;
+import htb.com.childrenapp.CAApplication;
 import htb.com.childrenapp.Core.CoreManager;
 import htb.com.childrenapp.Core.Login.LoginResponse;
 import htb.com.childrenapp.Core.Login.RegisterResponse;
@@ -35,7 +33,7 @@ import htb.com.childrenapp.UI.Main.ui_home;
  * Created by weidong_wu on 15/11/7.
  * 邮箱:wwdhao163@163.com
  */
-public class ui_login extends BaseActivity {
+public class ui_login extends BaseFragment {
 
     private Button Login_btn;//登陆按钮
     private BtnListener btnListener;
@@ -46,6 +44,7 @@ public class ui_login extends BaseActivity {
     private FrameLayout frameLayout = null;
     private LinearLayout layoutContainer;
     private ViewParent parent;
+    private String md5psw;
     private Handler m_Handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -54,6 +53,7 @@ public class ui_login extends BaseActivity {
                 frameLayout.removeViewAt(ShowLoadId);
             if (msg.what == Port.ResponseJsonCode_0) {
                 UserCore userCore = (UserCore)CoreManager.instance().getCore(UserCore.class);
+                userCore.getUserInfo().setPassword(md5psw);
                 userCore.saveUserInfo(getContext());
                 Intent intent = new Intent();
                 intent.setClass(getContext(), ui_home.class);
@@ -90,7 +90,7 @@ public class ui_login extends BaseActivity {
     @Override
     public void init() {
         setContentView(R.layout.ui_login);
-
+        CAApplication.instance().mList.remove(0);
         initUIInfo();
     }
 
@@ -130,7 +130,7 @@ public class ui_login extends BaseActivity {
                 if (CheckEditbox(userName, password)) {
                     checkKeyboard();
                     MD5 md5 = new MD5();
-                    String md5psw = md5.GetMD5Code(password);
+                    md5psw = md5.GetMD5Code(password);
                     sendLoginRequest(userName, md5psw);
                 } else {
                     ToastMessage("请输入用户信息!");
@@ -219,6 +219,7 @@ public class ui_login extends BaseActivity {
         ((ViewGroup) parent).addView(regist_view, 1);
         new layout_findPsw(this, frameLayout, regist_view, m_Handler);
     }
+
 }
 
 

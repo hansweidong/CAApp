@@ -18,6 +18,8 @@ public class UserInfo implements Serializable{
     //private String verificationToken;
     private String id;
 
+    private String password;
+
     private String token;
 
     public String getPhone() {
@@ -76,5 +78,13 @@ public class UserInfo implements Serializable{
     public void setToken(String token) {
         CAApplication.tokenId = token;
         this.token = token;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

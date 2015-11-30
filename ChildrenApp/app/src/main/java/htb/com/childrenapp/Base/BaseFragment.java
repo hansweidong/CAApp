@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import htb.com.childrenapp.CAApplication;
 import htb.com.childrenapp.R;
 
 
@@ -31,7 +32,7 @@ import htb.com.childrenapp.R;
  * Created by weidong_wu on 15/11/7.
  * 邮箱:wwdhao163@163.com
  */
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseFragment extends FragmentActivity {
     private static final String KeyTag = "BASE_TAG";
 
     private boolean isExit = false;
@@ -45,6 +46,9 @@ public abstract class BaseActivity extends FragmentActivity {
     protected Bundle bundle;
 
     protected Fragment mFragmentContent;
+
+    private boolean IntentBundleIsNull = true;
+
     private Handler mHandler = new Handler() {
 
         @Override
@@ -59,10 +63,15 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        CAApplication.instance().addActivity(this);
         if ((savedInstanceState != null) && savedInstanceState.containsKey(KeyTag)) {
             bundle = savedInstanceState;
-        } else {
+        } else if (getIntent().getExtras()!=null){
+            bundle = getIntent().getExtras();
+            IntentBundleIsNull = false;
+        }
+
+        if(IntentBundleIsNull){
             bundle = new Bundle();
         }
 
@@ -92,10 +101,7 @@ public abstract class BaseActivity extends FragmentActivity {
             Toast.makeText(getApplicationContext(), R.string.APP_EXIT_TIPS, Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            startActivity(intent);
-            System.exit(0);
+           CAApplication.instance().exit();
         }
     }
 
@@ -131,7 +137,6 @@ public abstract class BaseActivity extends FragmentActivity {
         linearLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
                 return true;
             }
         });

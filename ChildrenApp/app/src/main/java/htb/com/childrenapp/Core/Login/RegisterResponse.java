@@ -55,7 +55,8 @@ public class RegisterResponse extends AsyncHttpResponseHandler {
             try {
                 jsonObject = JsonParser.instance().ParserString(msg);
                 if (jsonObject == null) {
-                    handler.sendEmptyMessage(-1);
+                    if (handler!=null)
+                        handler.sendEmptyMessage(-1);
                     return;
                 }
                 int code = jsonObject.getInt("code");
@@ -63,9 +64,11 @@ public class RegisterResponse extends AsyncHttpResponseHandler {
                     Message msgObj = new Message();
                     msgObj.what =Port.ResponseRegisterSuccessCode;
                     msgObj.obj = this;
-                    handler.sendMessage(msgObj);
+                    if (handler!=null)
+                        handler.sendMessage(msgObj);
                 }else
-                    handler.sendEmptyMessage(code);
+                    if (handler!=null)
+                        handler.sendEmptyMessage(code);
 
             } catch (JSONException e) {
                 System.out.println(e.toString());
@@ -75,6 +78,7 @@ public class RegisterResponse extends AsyncHttpResponseHandler {
 
     @Override
     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-        handler.sendEmptyMessage(404);
+        if (handler!=null)
+            handler.sendEmptyMessage(404);
     }
 }

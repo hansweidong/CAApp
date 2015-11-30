@@ -1,5 +1,7 @@
 package htb.com.childrenapp.UI.Main;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,15 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-import htb.com.childrenapp.Framework.image.CircleImageView;
+import htb.com.childrenapp.CAApplication;
 import htb.com.childrenapp.Framework.widget.CircularImage;
 import htb.com.childrenapp.R;
-import htb.com.childrenapp.Framework.widget.PullScrollView;
+import htb.com.childrenapp.UI.Login.ui_login;
+
 /**
  * Created by weidong_wu on 15/11/18.
  * 邮箱:wwdhao163@163.com
@@ -74,6 +76,7 @@ public class Fragment_page_right extends Fragment {
         ((LinearLayout) view.findViewById(R.id.linear_phoneNumber)).setOnClickListener(btnClickedListener);
         ((LinearLayout) view.findViewById(R.id.linear_fixPsw)).setOnClickListener(btnClickedListener);
         ((Button) view.findViewById(R.id.userinfo_exit)).setOnClickListener(btnClickedListener);
+
     }
 
 
@@ -81,13 +84,29 @@ public class Fragment_page_right extends Fragment {
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.linear_name){
-
+                Intent intent = new Intent();
+                intent.putExtra(ui_fix_userinfo.OPERATOR_KEY, ui_fix_userinfo.FIX_USERNAME_KEY);
+                intent.setClass(getContext(), ui_fix_userinfo.class);
+                startActivity(intent);
+                //((Activity)getContext()).overridePendingTransition(android.R.anim.slide_in_left, R.anim.slide_in_right);
             }else if (v.getId() == R.id.linear_phoneNumber){
-
+                Intent intent = new Intent();
+                intent.putExtra(ui_fix_userinfo.OPERATOR_KEY, ui_fix_userinfo.FIX_USERPHONENUMBER_KEY);
+                intent.setClass(getContext(), ui_fix_userinfo.class);
+                startActivity(intent);
+                //((Activity)getContext()).overridePendingTransition(android.R.anim.slide_in_left,R.anim.slide_in_right);
             }else if (v.getId() == R.id.linear_fixPsw) {
-
+                Intent intent = new Intent();
+                intent.putExtra(ui_fix_userinfo.OPERATOR_KEY, ui_fix_userinfo.FIX_USERPASSWORD_KEY);
+                intent.setClass(getContext(), ui_fix_userinfo.class);
+                startActivity(intent);
+                //((Activity)getContext()).overridePendingTransition(android.R.anim.slide_in_left, R.anim.slide_in_right);
             }else if (v.getId() == R.id.userinfo_exit) {
-
+                Intent intent = new Intent();
+                intent.setClass(getContext(), ui_login.class);
+                startActivity(intent);
+                CAApplication.instance().mList.clear();
+                ((Activity)(getContext())).finish();
             }else if (v.getId() == R.id.imageHead){
 
             }

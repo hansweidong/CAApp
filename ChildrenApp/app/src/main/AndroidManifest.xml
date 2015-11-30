@@ -15,8 +15,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".splash"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            >
 
         </activity>
 
@@ -30,13 +31,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
+
         <activity
-            android:name=".UI.Main.ui_home"
+            android:name=".UI.Login.ui_login"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             />
-            -->
+
+        <activity android:name=".UI.Main.ui_fix_userinfo"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

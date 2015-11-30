@@ -10,7 +10,7 @@ import android.widget.Spinner;
 
 import java.util.HashMap;
 
-import htb.com.childrenapp.Base.BaseActivity;
+import htb.com.childrenapp.Base.BaseFragment;
 import htb.com.childrenapp.Core.Login.RegisterResponse;
 import htb.com.childrenapp.Core.Port;
 import htb.com.childrenapp.Framework.common.MD5;
@@ -28,11 +28,11 @@ public class layout_regitster {
     private EditText accountEdittext,pwdEdittext;
     private Button   btn_user_register;
     private Spinner roleSpinner;
-    private BaseActivity activity;
+    private BaseFragment activity;
     private int RoleID = 1;
     private FrameLayout frameLayout;
     private Handler handler;
-    public layout_regitster(BaseActivity activity,FrameLayout frameLayout,View view,Handler handler){
+    public layout_regitster(BaseFragment activity,FrameLayout frameLayout,View view,Handler handler){
         this.activity = activity;
         this.frameLayout = frameLayout;
         this.handler = handler;
