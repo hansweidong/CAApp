@@ -14,6 +14,8 @@ import htb.com.childrenapp.Core.CoreManager;
 import htb.com.childrenapp.Core.User.TeacherInfo;
 import htb.com.childrenapp.Core.User.UserCore;
 import htb.com.childrenapp.Core.User.UserType;
+import htb.com.childrenapp.Framework.widget.LoadingLayout;
+import htb.com.childrenapp.Framework.widget.pullToRefresh.PullToRefreshView;
 import htb.com.childrenapp.R;
 
 /**
@@ -25,6 +27,10 @@ public class Fragment_page_right_center extends Fragment {
     public   static final String KeyTag = "FRAGMENT_PAGE_RIGHT_CENTER";
     private Bundle bundle;
     private GridView teachers_gridView;
+    private LoadingLayout container_loading;
+
+    private PullToRefreshView pullToRefreshView;
+
     View view = null;
     public static Fragment_page_right_center newInstance(){
         Fragment_page_right_center instance = new Fragment_page_right_center();
@@ -62,6 +68,8 @@ public class Fragment_page_right_center extends Fragment {
 
     private void initUI(View view) {
         UserCore userCore = ((UserCore) CoreManager.instance().getCore(UserCore.class));
+        container_loading = (LoadingLayout)view.findViewById(R.id.container_loading);
+        pullToRefreshView = (PullToRefreshView)view.findViewById(R.id.pull_to_refresh);
         if (CAApplication.m_currentRoleType == UserType.UserTypeEnum.DIRECTOR || CAApplication.m_currentRoleType == UserType.UserTypeEnum.TEACHER){
             teachers_gridView = (GridView) view.findViewById(R.id.teachers_gridView);
             for (int idx = 0; idx < 15; idx++) {
@@ -71,6 +79,19 @@ public class Fragment_page_right_center extends Fragment {
             }
             teacherItemAdapter m_teacherItemAdaper = new teacherItemAdapter(getContext(), userCore.getTeacherList());
             teachers_gridView.setAdapter(m_teacherItemAdaper);
+            //container_loading.setVisibility(View.VISIBLE);
+            //container_loading.showLoading();
+            pullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    pullToRefreshView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            pullToRefreshView.setRefreshing(false);
+                        }
+                    },2000);
+                }
+            });
         }else{
             //家长端的处理
         }

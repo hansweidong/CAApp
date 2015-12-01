@@ -35,6 +35,8 @@ import htb.com.childrenapp.R;
 public abstract class BaseFragment extends FragmentActivity {
     private static final String KeyTag = "BASE_TAG";
 
+    protected boolean isCanDoubleClick = true; //是否需要双击退出应用
+
     private boolean isExit = false;
 
     private Context m_Context = null;
@@ -108,8 +110,11 @@ public abstract class BaseFragment extends FragmentActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            exit();
-            return false;
+            if (isCanDoubleClick) {
+                exit();
+                return false;
+            }else
+                return super.onKeyDown(keyCode, event);
         } else {
             return super.onKeyDown(keyCode, event);
         }

@@ -30,6 +30,7 @@ public class ui_fix_userinfo extends BaseFragment {
     }
 
     private void InitUI(){
+        isCanDoubleClick = false;
         btn_back_common = (LinearLayout)findViewById(R.id.btn_back_common);
         btn_yes_common = (LinearLayout)findViewById(R.id.btn_yes_common);
         fix_info_edt = (EditText)findViewById(R.id.fix_info_edt);

@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <GridView
-        android:id="@+id/teachers_gridView"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+   >
+
+    <htb.com.childrenapp.Framework.widget.pullToRefresh.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="3"/>
-</LinearLayout>
+        android:layout_height="match_parent">
+        <GridView
+            android:background="@color/bg"
+            android:id="@+id/teachers_gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"/>
+    </htb.com.childrenapp.Framework.widget.pullToRefresh.PullToRefreshView>
+
+    <htb.com.childrenapp.Framework.widget.LoadingLayout
+        android:id="@+id/container_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>
