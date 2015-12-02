@@ -13,13 +13,13 @@ import htb.com.childrenapp.R;
  * Created by weidong_wu on 15/11/18.
  * 邮箱:wwdhao163@163.com
  */
-public class Fragment_page_left  extends Fragment {
+public class fragment_page_left extends Fragment {
 
     public   static final String KeyTag = "FRAGMENT_PAGE_LEFT";
     private Bundle bundle;
 
-    public static Fragment_page_left newInstance(){
-        Fragment_page_left instance = new Fragment_page_left();
+    public static fragment_page_left newInstance(){
+        fragment_page_left instance = new fragment_page_left();
         return instance;
     }
 

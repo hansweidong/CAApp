@@ -50,8 +50,13 @@ public class teacherItemAdapter extends BaseAdapter {
             convertView.setTag(item);
         }else
             item = (Item)convertView.getTag();
-        TeacherInfo teacherInfo = teacherInfoList.get(position);
-        item.teacherName.setText(teacherInfo.getTeacherName());
+        if (position>0) {
+            TeacherInfo teacherInfo = teacherInfoList.get(position);
+            item.teacherName.setText(teacherInfo.getTeacherName());
+        }else {
+            item.circularImage.setImageResource(R.drawable.mobile_live_btn_normal);
+            item.teacherName.setText("添加老师");
+        }
         return convertView;
     }
 

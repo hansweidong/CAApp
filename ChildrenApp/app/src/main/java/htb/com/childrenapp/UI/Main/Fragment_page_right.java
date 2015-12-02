@@ -24,7 +24,7 @@ import htb.com.childrenapp.UI.Login.ui_login;
  * Created by weidong_wu on 15/11/18.
  * 邮箱:wwdhao163@163.com
  */
-public class Fragment_page_right extends Fragment {
+public class fragment_page_right extends Fragment {
 
     public   static final String KeyTag = "FRAGMENT_PAGE_RIGHT";
     private Bundle bundle;
@@ -35,8 +35,8 @@ public class Fragment_page_right extends Fragment {
     private TextView userinfo_checkPsw_btn;
     private CircularImage imageHead;
 
-    public static Fragment_page_right newInstance(){
-        Fragment_page_right instance = new Fragment_page_right();
+    public static fragment_page_right newInstance(){
+        fragment_page_right instance = new fragment_page_right();
         return instance;
     }
 

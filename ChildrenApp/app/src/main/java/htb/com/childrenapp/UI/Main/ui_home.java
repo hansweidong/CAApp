@@ -20,7 +20,7 @@ public class ui_home extends BaseFragment {
 
     private String[][] RadioButton_Info = {
             {},
-            {"首页", "消息", "师资", "我"},
+            {"班级", "消息", "师资", "我"},
             {"消息", "小朋友", "家长", "我"},
             {"消息", "宝贝", "老师", "我"}
     };
@@ -60,9 +60,9 @@ public class ui_home extends BaseFragment {
             rd_Objs[idx].setOnCheckedChangeListener(m_radioBtnListener);
         }
 
-        Fragment_page_left fragment_page_left = Fragment_page_left.newInstance();
+        fragment_page_left fragment_page_left = htb.com.childrenapp.UI.Main.fragment_page_left.newInstance();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.container_fragment_content, fragment_page_left, Fragment_page_left.KeyTag);
+        transaction.add(R.id.container_fragment_content, fragment_page_left, htb.com.childrenapp.UI.Main.fragment_page_left.KeyTag);
         transaction.addToBackStack(null);
         transaction.commit();
         m_CurrentFragment = fragment_page_left;
@@ -78,29 +78,29 @@ public class ui_home extends BaseFragment {
             int idx = buttonView.getId();
             Fragment toShow;
             if (isChecked) {
-                Fragment fragment_1 = fragmentManager.findFragmentByTag(Fragment_page_left.KeyTag);
+                Fragment fragment_1 = fragmentManager.findFragmentByTag(fragment_page_left.KeyTag);
 
-                Fragment fragment_2 = fragmentManager.findFragmentByTag(Fragment_page_left_center.KeyTag);
+                Fragment fragment_2 = fragmentManager.findFragmentByTag(fragment_page_left_center.KeyTag);
 
-                Fragment fragment_3 = fragmentManager.findFragmentByTag(Fragment_page_right_center.KeyTag);
+                Fragment fragment_3 = fragmentManager.findFragmentByTag(fragment_page_right_center.KeyTag);
 
-                Fragment fragment_4 = fragmentManager.findFragmentByTag(Fragment_page_right.KeyTag);
+                Fragment fragment_4 = fragmentManager.findFragmentByTag(fragment_page_right.KeyTag);
 
                 if (idx == R.id.rb_1) {
-                    toShow = (fragment_1 == null) ? Fragment_page_left.newInstance() : fragment_1;
-                    switchContent(m_CurrentFragment, toShow, R.id.container_fragment_content, Fragment_page_left.KeyTag);
+                    toShow = (fragment_1 == null) ? fragment_page_left.newInstance() : fragment_1;
+                    switchContent(m_CurrentFragment, toShow, R.id.container_fragment_content, fragment_page_left.KeyTag);
                     m_CurrentFragment = toShow;
                 } else if (idx == R.id.rb_2) {
-                    toShow = (fragment_2 == null) ? Fragment_page_left_center.newInstance() : fragment_2;
-                    switchContent(m_CurrentFragment, toShow, R.id.container_fragment_content, Fragment_page_left_center.KeyTag);
+                    toShow = (fragment_2 == null) ? fragment_page_left_center.newInstance() : fragment_2;
+                    switchContent(m_CurrentFragment, toShow, R.id.container_fragment_content, fragment_page_left_center.KeyTag);
                     m_CurrentFragment = toShow;
                 } else if (idx == R.id.rb_3) {
-                    toShow = (fragment_3 == null) ? Fragment_page_right_center.newInstance() : fragment_3;
-                    switchContent(m_CurrentFragment, toShow, R.id.container_fragment_content, Fragment_page_right_center.KeyTag);
+                    toShow = (fragment_3 == null) ? fragment_page_right_center.newInstance() : fragment_3;
+                    switchContent(m_CurrentFragment, toShow, R.id.container_fragment_content, fragment_page_right_center.KeyTag);
                     m_CurrentFragment = toShow;
                 } else if (idx == R.id.rb_4) {
-                    toShow = (fragment_4 == null) ? Fragment_page_right.newInstance() : fragment_4;
-                    switchContent(m_CurrentFragment, toShow, R.id.container_fragment_content, Fragment_page_right.KeyTag);
+                    toShow = (fragment_4 == null) ? fragment_page_right.newInstance() : fragment_4;
+                    switchContent(m_CurrentFragment, toShow, R.id.container_fragment_content, fragment_page_right.KeyTag);
                     m_CurrentFragment = toShow;
                 }
 

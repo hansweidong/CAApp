@@ -1,11 +1,13 @@
 package htb.com.childrenapp.UI.Main;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import htb.com.childrenapp.Base.adapter.teacherItemAdapter;
@@ -17,12 +19,13 @@ import htb.com.childrenapp.Core.User.UserType;
 import htb.com.childrenapp.Framework.widget.LoadingLayout;
 import htb.com.childrenapp.Framework.widget.pullToRefresh.PullToRefreshView;
 import htb.com.childrenapp.R;
+import htb.com.childrenapp.UI.ItemListInfo.ui_teacher_info;
 
 /**
  * Created by weidong_wu on 15/11/18.
  * 邮箱:wwdhao163@163.com
  */
-public class Fragment_page_right_center extends Fragment {
+public class fragment_page_right_center extends Fragment {
 
     public   static final String KeyTag = "FRAGMENT_PAGE_RIGHT_CENTER";
     private Bundle bundle;
@@ -32,8 +35,8 @@ public class Fragment_page_right_center extends Fragment {
     private PullToRefreshView pullToRefreshView;
 
     View view = null;
-    public static Fragment_page_right_center newInstance(){
-        Fragment_page_right_center instance = new Fragment_page_right_center();
+    public static fragment_page_right_center newInstance(){
+        fragment_page_right_center instance = new fragment_page_right_center();
         return instance;
     }
 
@@ -90,6 +93,19 @@ public class Fragment_page_right_center extends Fragment {
                             pullToRefreshView.setRefreshing(false);
                         }
                     },2000);
+                }
+            });
+            teachers_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 0){
+
+                    }else{
+                        Intent intent = new Intent();
+                        intent.putExtra(ui_teacher_info.TEACHER_POS_KEY, position);
+                        intent.setClass(getContext(), ui_teacher_info.class);
+                        startActivity(intent);
+                    }
                 }
             });
         }else{

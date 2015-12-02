@@ -41,6 +41,10 @@
         <activity android:name=".UI.Main.ui_fix_userinfo"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
+
+        <activity android:name=".UI.ItemListInfo.ui_teacher_info"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>
